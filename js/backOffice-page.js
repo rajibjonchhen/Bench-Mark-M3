@@ -1,12 +1,15 @@
 
 
     
+          const genre = new URLSearchParams(window.location.search).get("movieGenre")
           const movieId = new URLSearchParams(window.location.search).get("movieId")
-          const url = movieId? "https://striveschool-api.herokuapp.com/api/movies/" + movieId: "https://striveschool-api.herokuapp.com/api/movies"
+          const url = category? "https://striveschool-api.herokuapp.com/api/movies/" + genre: "https://striveschool-api.herokuapp.com/api/movies"
+          const url_id = movieId? "https://striveschool-api.herokuapp.com/api/movies/" + genre + "/" + movieId: "https://striveschool-api.herokuapp.com/api/movies/" +  genre 
           const method = movieId? "PUT":"POST"
           const deleteBtn = document.getElementById("deleteBtn")
          
-          
+          console.log(genre)
+          console.log(movieId)
          
 
 
@@ -22,7 +25,7 @@
            
           
             fetch("https://striveschool-api.herokuapp.com/api/movies", {
-            method:"POST",
+            method,
             body:JSON.stringify(newMovie),    
             headers: {
                 'Content-Type': 'application/json',   
@@ -40,7 +43,7 @@
                 alertBox(err,"danger")
             })
         }
-        
+
 
       
 
@@ -49,7 +52,7 @@
           const handleDelete = async function(){
             confirm(`Do you want to delete product with id ${movieId}?`)
             if(confirm){
-              fetch(url, {
+              fetch("https://striveschool-api.herokuapp.com/api/movies/", {
                 method:"DELETE",
             headers: {
                 "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIwYWU1OTRjZmY1ZjAwMTU5MGJkYWYiLCJpYXQiOjE2MzkxMzAwOTksImV4cCI6MTY0MDMzOTY5OX0.s2tZXViAm7UEvRtsxq8dzSl2IfgwSUd33HySA5gYoa4"
@@ -77,7 +80,7 @@
           if(movieId){
             deleteBtn.style.display = "block"
             document.querySelector(".h4").innerText = "-Edit Mode-"
-            fetch(url, {
+            fetch(url_id, {
               method,
           headers: {
             "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIwYWU1OTRjZmY1ZjAwMTU5MGJkYWYiLCJpYXQiOjE2MzkxMzAwOTksImV4cCI6MTY0MDMzOTY5OX0.s2tZXViAm7UEvRtsxq8dzSl2IfgwSUd33HySA5gYoa4"
