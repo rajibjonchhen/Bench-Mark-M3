@@ -1,30 +1,25 @@
-
-
     
           const genre = new URLSearchParams(window.location.search).get("movieGenre")
           const movieId = new URLSearchParams(window.location.search).get("movieId")
-          const url = category? "https://striveschool-api.herokuapp.com/api/movies/" + genre: "https://striveschool-api.herokuapp.com/api/movies"
-          const url_id = movieId? "https://striveschool-api.herokuapp.com/api/movies/" + genre + "/" + movieId: "https://striveschool-api.herokuapp.com/api/movies/" +  genre 
+          //const url = category? "https://striveschool-api.herokuapp.com/api/movies/" + genre: "https://striveschool-api.herokuapp.com/api/movies"
+          const url = movieId? "https://striveschool-api.herokuapp.com/api/movies/" + genre + "/" + movieId: "https://striveschool-api.herokuapp.com/api/movies"
           const method = movieId? "PUT":"POST"
           const deleteBtn = document.getElementById("deleteBtn")
-         
+        
           console.log(genre)
           console.log(movieId)
-         
+        
 
 
           const handleSubmit = function(event){
             event.preventDefault()
-        
             const newMovie= {
                 name: document.getElementById("movie-name").value,
                 description: document.getElementById("description").value,
                 category: document.getElementById("category").value.toLowerCase(),
                 imageUrl: document.getElementById("imageUrl").value
             }
-           
-          
-            fetch("https://striveschool-api.herokuapp.com/api/movies", {
+            fetch(url, {
             method,
             body:JSON.stringify(newMovie),    
             headers: {
@@ -35,10 +30,8 @@
             .then(response => response.json())
             .then(movies=>{
                 console.log(movies)    
-                setTimeout( alertBox("Successfully posted new product","success"),3000)
-            
+              setTimeout( alertBox("Successfully posted new product","success"),3000)
             })
-             
             .catch(err=>{
                 alertBox(err,"danger")
             })
@@ -52,7 +45,7 @@
           const handleDelete = async function(){
             confirm(`Do you want to delete product with id ${movieId}?`)
             if(confirm){
-              fetch("https://striveschool-api.herokuapp.com/api/movies/", {
+              fetch(url_id, {
                 method:"DELETE",
             headers: {
                 "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIwYWU1OTRjZmY1ZjAwMTU5MGJkYWYiLCJpYXQiOjE2MzkxMzAwOTksImV4cCI6MTY0MDMzOTY5OX0.s2tZXViAm7UEvRtsxq8dzSl2IfgwSUd33HySA5gYoa4"
@@ -81,14 +74,14 @@
             deleteBtn.style.display = "block"
             document.querySelector(".h4").innerText = "-Edit Mode-"
             fetch(url_id, {
-              method,
+              method:"GET",
           headers: {
             "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIwYWU1OTRjZmY1ZjAwMTU5MGJkYWYiLCJpYXQiOjE2MzkxMzAwOTksImV4cCI6MTY0MDMzOTY5OX0.s2tZXViAm7UEvRtsxq8dzSl2IfgwSUd33HySA5gYoa4"
-        
           }
       })
       .then(response => response.json())
       .then(movies =>{
+        console.log(movies)
         document.getElementById("movie-name").value =movies.name
         document.getElementById("description").value =movies.description
         document.getElementById("category").value =movies.category

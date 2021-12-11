@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <link rel="stylesheet" href="/css/style.css" />
         <script src="https://kit.fontawesome.com/73c4ca1b43.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <title>Bench-Mark-M3</title>
         <style>
@@ -102,12 +103,13 @@
                               <input type="text" class="form-control" id="imageUrl" >
                             </div>
                             </div>
-
-                            <button type="button" class="btn btn-primary" onclick="handleSubmit(event)">Submit</button>
-                            <button type="reset" class="btn btn-outline-success my-2 my-sm-0" >Reset</button>
-                          <a type="button" href="/index.html" class="btn btn-outline-success my-2 my-sm-0">Back</a>
-                          <button type="button" class="btn btn-outline-success my-2 my-sm-0" id="deleteBtn" onclick="handleDelete(event)">Delete</button>
+                            <div class="d-flex">
+                                <button type="button" class="btn btn-success mx-1" onclick="handleSubmit(event)">Submit</button>
+                                <button type="reset" class="btn btn-outline-success my-2 my-sm-0 mx-1" >Reset</button>
+                                <a type="button" href="/index.html" class="btn btn-outline-success my-2 my-sm-0 mx-1">Back</a>
+                                <button type="button" class="btn btn-danger my-2 my-sm-0 mx-1" id="deleteBtn" onclick="handleDelete(event)"><i class="bi bi-trash"></i></button>
                         
+                            </div>
                     
             
             </div>
