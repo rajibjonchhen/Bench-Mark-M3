@@ -17,7 +17,7 @@ const hideAppear1 = function(){
 const loadMovies = function(genreArr){
 
     for(let i = 0; i < genreArr.length; i++ ){
-        fetch("https://striveschool-api.herokuapp.com/api/movies/horror" , {
+        fetch("https://striveschool-api.herokuapp.com/api/movies/" + genreArr[i], {
         method:"GET",
         headers: {   
             "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIwYWU1OTRjZmY1ZjAwMTU5MGJkYWYiLCJpYXQiOjE2MzkxMzAwOTksImV4cCI6MTY0MDMzOTY5OX0.s2tZXViAm7UEvRtsxq8dzSl2IfgwSUd33HySA5gYoa4"
@@ -51,7 +51,7 @@ const displayMovies = function(movies,index){
 
 window.onload =  function(){
     
-    let genreArr = ["romantic"]
+    let genreArr = ["romantic","horror","thriller"]
 
             loadMovies(genreArr)
 
